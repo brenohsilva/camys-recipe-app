@@ -1,0 +1,120 @@
+<div
+  style=" background-color: #F0F4F9;"
+  class="main-container d-flex flex-column gap-4 align-items-center justify-content-center m-4 p-5"
+>
+  <form (submit)="submit($event)" class=" border border-dark-subtle rounded-4 p-3 px-4 bg-white" style="width: 55vw;" >
+    <div class=" mt-lg-4 mt-4 mb-4">
+      <h3><strong class="text-primary">Camy's</strong> Recipe</h3>
+    </div>
+
+    <div class="row d-flex flex-column flex-lg-row w-100">
+      <div class="col">
+        <div class="mb-4">
+          <h2 class="">
+            Crie a sua conta agora <br/> mesmo.
+          </h2>
+          <p>insira as suas informações</p>
+          
+        </div>
+      </div>
+  
+      <div class="col mt-2">
+        <div class="d-flex flex-column flex-lg-row gap-4 mb-4">
+          <div class="input-group">
+            <input
+              class="form-control fs-6 border-secondary rounded-3 p-2 px-3 "
+              placeholder="Primeiro nome"
+              type="text"
+              name="first_name"
+              id="first_name"
+              required
+              [(ngModel)]="user.first_name"
+            />
+            <div class="invalid-feedback">
+              Por favor, forneça o primeiro nome.
+            </div>
+          </div>
+          <div class="input-group">
+            <input
+              class="form-control fs-6 border-secondary rounded-3 p-2 px-3"
+              placeholder="Segundo nome"
+              type="text"
+              name="last_name"
+              id="last_name"
+              required
+              [(ngModel)]="user.last_name"
+              />
+              <div class="invalid-feedback">
+                Por favor, forneça um sobrenome.
+              </div>
+          </div>
+        </div>
+        <div class="d-flex flex-column">
+          <div class="input-group d-flex flex-column mb-3">
+            <input
+              class="form-control fs-6 border-secondary rounded-3 p-2 px-3 w-100 "
+              placeholder="Email"
+              type="email"
+              name="email"
+              required
+              id="email"
+              [(ngModel)]="user.email"
+            />
+            <div class="invalid-feedback">
+              Por favor, forneça um email válido.
+            </div>
+            @if (isExist) {
+              <div class="text-danger">
+               E-mail ou usuário já existente.
+              </div>
+            }
+          </div>
+          <div class=" d-flex flex-column mb-3">
+            <input
+              class="form-control fs-6 border-secondary rounded-3 p-2 px-3"
+              placeholder="Usuário"
+              type="text"
+              name="nickname"
+              required
+              id="nickname"
+              [(ngModel)]="user.username"
+            />
+            <div class="invalid-feedback">
+              Por favor, forneça um nome de usuário.
+            </div>
+            @if (isExist) {
+              <div class="text-danger">
+               E-mail ou usuário já existente.
+              </div>
+            }
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input
+            class="form-control fs-6 border-secondary rounded-3 p-2 px-3"
+            placeholder="Crie uma senha "
+            type="password"
+            name="password2"
+            id="password2"
+            required
+            [(ngModel)]="user.password"
+          />
+          <div class="invalid-feedback">Por favor, forneça a senha.</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="d-flex justify-content-end mt-5 mb-3 me-4">
+      <button type="submit" class="btn rounded- border bg-primary">
+        Cadastrar
+      </button>
+    </div>
+    
+  </form>
+
+  <p>
+    Já é cadastrado? então
+    <a class="text-black" href="/login">entre por aqui</a>
+  </p>
+</div>

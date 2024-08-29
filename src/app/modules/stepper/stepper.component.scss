@@ -1,0 +1,35 @@
+.step {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  .step-number {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #FDF7EF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+  }
+  
+  .step-title {
+    font-size: 16px;
+  }
+  
+  .step.active .step-number {
+    background-color: #F7CE91;
+    color: #000000;
+  }
+  
+  .content {
+    border: 1px dashed #ddd;
+    min-height: 200px;
+  }
+  
+  button:disabled {
+    cursor: not-allowed;
+  }
+  

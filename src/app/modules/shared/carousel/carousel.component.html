@@ -1,0 +1,64 @@
+<div>
+  <div
+    class=""
+  >
+    @for (post of paginatedPosts; track $index) {
+    <div class=" p-0 rounded-4 w-100 d-flex flex-column justify-content-center align-items-center gap-5">
+      <div class="d-flex justify-content-center shadow rounded-4" style="width: 23vw">
+        <img
+          src="{{ post.image }}"
+          class="rounded-4 shadow img-fluid"
+          alt="imagem da receira"
+        />
+      </div>
+      <div class="mt-2">
+        <a
+          class="link-offset-2 link-underline link-underline-opacity-0 text-black"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+        >
+          <h5 class="" >{{ post.description }}</h5>
+        </a>
+      </div>
+    </div>
+    }
+  </div>
+  <div class="mt-2 mb-2">
+    <div class="container my-auto">
+      <nav aria-label="..." class="row justify-content-center">
+        <ul
+          class="pagination align-items-center my-auto col-5 justify-content-center"
+        >
+          <!-- Voltar -->
+          <li class="page-item">
+            <a
+              class="btn on-hover border bg-black m-0 p-1 rounded-4"
+              (click)="previousPage()"
+              [class.disabled]="currentPage === 1"
+            >
+            </a>
+          </li>
+          <!-- Números das páginas -->
+          @for (page of pagesArray; track $index) {
+          <li class="page-item">
+            <a
+              class="btn on-hover border bg-black p-1 rounded-4 "
+              (click)="goToPage(page)"
+              [ngClass]="{ active: page === currentPage }"
+            ></a>
+          </li>
+          }
+          <!-- Avançar -->
+          <li class="page-item">
+            <a
+              class="btn on-hover border bg-black m-0 p-1 rounded-4 "
+              (click)="nextPage()"
+              [class.disabled]="currentPage === totalPages"
+            >
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

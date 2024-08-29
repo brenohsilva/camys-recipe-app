@@ -1,0 +1,60 @@
+<main class="container-fluid m-3">
+  <div class="skeleton-topbar"></div>
+
+  <div class="d-flex flex-column align-items-center">
+    <div class="skeleton-image my-5 mx-5"></div>
+
+    <div class="skeleton-tags d-flex gap-3 p-2 px-4 rounded-3">
+      <div class="skeleton-tag bg-primary-subtle p-1 px-3 rounded-4"></div>
+      <div class="skeleton-tag bg-primary-subtle p-1 px-3 rounded-4"></div>
+      <div class="skeleton-tag bg-primary-subtle p-1 px-3 rounded-4"></div>
+      <div class="skeleton-tag bg-primary-subtle p-1 px-3 rounded-4"></div>
+    </div>
+  </div>
+
+  <div
+    class="skeleton-recipes d-flex row justify-content-center align-items-center gap-5 py-4 m-4"
+  >
+    @for (recipe of [1, 2, 3, 4]; track $index) {
+    <div class="col-3 p-0 rounded-4">
+      <div class="skeleton-recipe-image rounded-4"></div>
+      <div class="skeleton-recipe-content mt-2">
+        <div class="skeleton-recipe-title"></div>
+        <div
+          class="skeleton-recipe-details d-flex justify-content-between align-items-center mt-2"
+        >
+          <div class="skeleton-recipe-time"></div>
+          <div
+            class="skeleton-recipe-badge badge rounded-pill text-bg-primary"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    }
+  </div>
+
+  <div class="skeleton-pagination mt-2 mb-2">
+    <div class="container my-auto">
+      <nav aria-label="..." class="row justify-content-center">
+        <ul
+          class="pagination align-items-center my-auto col-5 justify-content-center"
+        >
+          <li class="skeleton-page-item page-item"></li>
+          @for (page of [1, 2, 3, 4]; track $index) {
+          <li class="skeleton-page-number page-item"></li>
+          <li class="skeleton-page-item page-item"></li>
+          }
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <footer class="skeleton-footer m-auto w-75">
+    <div class="m-auto d-flex justify-content-end gap-3">
+      <div class="skeleton-icon"></div>
+      <div class="skeleton-icon"></div>
+      <div class="skeleton-icon"></div>
+    </div>
+  </footer>
+</main>

@@ -1,0 +1,333 @@
+<div>
+  <div class="d-flex flex-column m-5 p-5 justify-content-center">
+    <div class="d-flex justify-content-center">
+      <h3>Adicione aqui a sua receita</h3>
+    </div>
+    <div class="border-danger">
+      <main class="container mt-4">
+        <div class="d-flex justify-content-center mb-4">
+          <div class="step" [ngClass]="{ active: currentStep === 1 }">
+            <div class="step-number">1</div>
+            <div class="step-title">Informações principais</div>
+          </div>
+          <hr
+            [ngClass]="{
+              'text-primary': currentStep === 2 || currentStep === 3
+            }"
+            style="width: 9rem; margin-right: 1rem"
+          />
+          <div class="step" [ngClass]="{ active: currentStep === 2 }">
+            <div class="step-number">2</div>
+            <div class="step-title">Ingredientes</div>
+          </div>
+          <hr
+            [ngClass]="{
+              'text-primary': currentStep === 3 || currentStep === 4
+            }"
+            style="width: 9rem; margin-right: 1rem"
+          />
+          <div class="step" [ngClass]="{ active: currentStep === 3 }">
+            <div class="step-number">3</div>
+            <div class="step-title">Passo a Passo</div>
+          </div>
+          <hr
+            [ngClass]="{
+              'text-primary': currentStep === 4 || currentStep === 4
+            }"
+            style="width: 9rem; margin-right: 1rem"
+          />
+          <div class="step" [ngClass]="{ active: currentStep === 4 }">
+            <div class="step-number">4</div>
+            <div class="step-title">Finalização</div>
+          </div>
+        </div>
+        <div class="content border-primary p-4">
+          <ng-container [ngSwitch]="currentStep">
+            <div class="row" *ngSwitchCase="1">
+              <div class="col">
+                <div class="mb-2">
+                  <span class="" id="name">Nome da receita </span>
+                  <div class="input-group input-group-sm mb-2 mt-1 w-50">
+                    <input
+                      type="text"
+                      class="form-control border border-black"
+                      aria-label="Sizing example input"
+                      aria-describedby="inputGroup-sizing-sm"
+                    />
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <span class="" id="name">Descrição </span>
+                  <div class="form-floating mb-2 mt-1 w-75">
+                    <textarea
+                      id="description"
+                      class="form-control border border-black"
+                      aria-label="Sizing example input"
+                      aria-describedby="inputGroup-sizing-sm"
+                    ></textarea>
+                    <label for="floatingTextarea"
+                      >Descreva aqui a sua receita</label
+                    >
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <span class="" id="recipe-image">Imagem </span>
+                  <div class="mt-1 w-75">
+                    <input
+                      [(ngModel)]="urlImage"
+                      type="text"
+                      class="form-control border border-black"
+                      aria-label="Sizing example input"
+                      placeholder="Adicione aqui uma url de imagem"
+                    />
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <span class="" id="recipe-image">Tipo </span>
+                  <select
+                    class="form-select form-select mt-1 w-50 border border-black"
+                    aria-label="Small select example"
+                  >
+                    <option selected>Selecione um tipo</option>
+                    <option value="1">Apenas massa</option>
+                    <option value="2">Massa e Recheio</option>
+                  </select>
+                </div>
+                <div class="mb-2">
+                  <span class="" id="recipe-image">Porção </span>
+                  <select
+                    class="form-select form-select mt-1 w-50 border border-black"
+                    aria-label="Small select example"
+                  >
+                    <option selected>Serve quantas pessoas?</option>
+                    <option value="1">1 Pessoa</option>
+                    <option value="2">2 Pessoas</option>
+                    <option value="3">3 Pessoas</option>
+                    <option value="4">4 Pessoas</option>
+                    <option value="5">5 Pessoas</option>
+                  </select>
+                </div>
+                <div class="mb-2">
+                  <span class="" id="recipe-image">Tempo </span>
+                  <div class="input-group mb-3 mt-1 w-50">
+                    <input
+                      type="number"
+                      class="form-control border border-black"
+                    />
+                    <span class="input-group-text bg-white" id="basic-addon2"
+                      >Minutos</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="d-flex justify-content-center mt-4">
+                  @if (urlImage) {
+                  <img [src]="urlImage" width="50%" alt="" srcset="" />
+                  } @else {
+                  <div
+                    style="
+                      height: 290px;
+                      width: 290px;
+                      border-radius: 150px;
+                      opacity: 60%;
+                    "
+                    class="bg-primary-subtle d-flex align-content-center align-items-center justify-content-center fw-bolder"
+                  >
+                    Sua imagem aqui
+                  </div>
+                  }
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngSwitchCase="2">
+              <div class="col">
+                <span class="" id="name">Adicione aqui seus ingredientes </span>
+                <div class="mb-2 mt-2">
+                  <select style="width: 18%;"
+                    class="form-select-sm form-select mt-1 border border-black"
+                    aria-label="Small select example"
+                    [(ngModel)]="typeIngredients"
+                  >
+                    <option selected>Tipo</option>
+                    <option value="1">Massa</option>
+                    <option value="2">Recheio</option>
+                    
+                  </select>
+                </div>
+                <div class="input-group input-group-sm mb-2 mt-1 w-50">
+                  <input
+                    [(ngModel)]="ingredient"
+                    type="text"
+                    class="form-control rounded-2 border border-black"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm"
+                  />
+                  <button
+                    (click)="addIngredient(typeIngredients)"
+                    class="btn bg-primary rounded-2 ms-1"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <div class="col">
+                <span>Ingredientes</span>
+                <div
+                  style="
+                    height: 20rem;
+                    width: 30rem;
+                    border: 1px dashed rgb(211, 210, 210);
+                  "
+                  class="mt-2 p-2 d-flex flex-column"
+                >
+                  @for (item of ingredients; track $index) {
+                  <span
+                  [ngClass]="item.type === '1' ? 'bg-primary' : 'bg-secondary' "
+                    class=" d-flex align-content-center align-items-center justify-content-center gap-1 rounded-3 p-0 px-2 m-1"
+                    style="width: fit-content"
+                    >{{ item.name }}
+                    <svg
+                    (click)="removeIngredient($index)"
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="20px"
+                      viewBox="0 -960 960 960"
+                      width="20px"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z"
+                      />
+                    </svg>
+                  </span>
+                  }
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngSwitchCase="3">
+              <div class="col">
+                <span class="" id="name">Adicione aqui o passo a passo </span>
+                <div class="mb-2 mt-2">
+                  <select style="width: 18%;"
+                    class="form-select-sm form-select mt-1 border border-black"
+                    aria-label="Small select example"
+                    [(ngModel)]="typeIngredients"
+                  >
+                    <option selected>Tipo</option>
+                    <option value="1">Massa</option>
+                    <option value="2">Recheio</option>
+                    
+                  </select>
+                </div>
+                <div class="d-flex align-content-center align-items-center">
+                  <div class="form-floating mb-2 mt-1 w-50">
+                    <textarea
+                      [(ngModel)]="ingredient"
+                      id="step"
+                      class="form-control border border-black"
+                      aria-label="Sizing example input"
+                      aria-describedby="inputGroup-sizing-sm"
+                    ></textarea>
+                    <label for="floatingTextarea"
+                      >Descreva aqui o passo a passo</label
+                    >
+                  </div>
+                  <button style="height: 40px;"
+                    (click)="addIngredient(typeIngredients)"
+                    class="btn bg-primary rounded-2 ms-1"
+                  >
+                    +
+                  </button>
+                </div>
+               
+              </div>
+              <div class="col">
+                <span>Passo a Passo</span>
+                <div
+                  style="
+                    height: 20rem;
+                    width: 30rem;
+                    border: 1px dashed rgb(211, 210, 210);
+                  "
+                  class="mt-2 p-2 d-flex flex-column"
+                >
+                  @for (item of ingredients; track $index) {
+                  <span
+                  [ngClass]="item.type === '1' ? 'bg-primary' : 'bg-secondary' "
+                    class=" d-flex align-content-center align-items-center justify-content-center gap-1 rounded-3 p-0 px-2 m-1"
+                    style="width: fit-content"
+                    >{{ item.name }}
+                    <svg
+                    (click)="removeIngredient($index)"
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="20px"
+                      viewBox="0 -960 960 960"
+                      width="20px"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z"
+                      />
+                    </svg>
+                  </span>
+                  }
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngSwitchCase="4">
+              <div class="d-flex justify-content-center">
+                <h5>Adicione as categorias da sua receita</h5>
+              </div>
+              <div class="d-flex justify-content-center mt-2"> @for (item of categories; track $index) {
+                <button class="btn bg-primary-subtle p-1 px-2 m-1 rounded-4"
+                [ngClass]="{
+                  'bg-primary-subtle': !selectedCategories.includes(item),
+                  'bg-primary text-white': selectedCategories.includes(item)
+                }"
+                (click)="toggleCategory(item)"
+                >{{item}}</button>
+                }
+              </div>
+            </div>
+            <!-- <div class="row" *ngSwitchCase="4">
+              <div class="d-flex justify-content-center">
+                <h4>Parabéns!!</h4>
+              </div>
+              <div class="d-flex justify-content-center">
+                <img src="../../../assets/success.png" alt="" srcset="" width="30%">
+              </div>
+              <div class="d-flex justify-content-center">
+                <p class="fw-bold"> Receita adiionada com sucesso, venha ver como ficou essa delicia!</p>
+              </div>
+              <div class="d-flex justify-content-center">
+                <p>Ir para receitas.</p>
+              </div>
+              
+            </div> -->
+          </ng-container>
+        </div>
+        <div class="d-flex justify-content-between mt-4">
+          <button
+            class="btn btn-primary"
+            (click)="previousStep()"
+            [disabled]="currentStep === 1"
+          >
+            <span>&larr;</span> Voltar
+          </button>
+          <button
+            class="btn btn-primary d-flex gap-1"
+            (click)="nextStep()"
+          > 
+          @if (currentStep === 4) {
+            <span>Finalizar</span>
+
+          } @else {
+            <span >Avançar</span> 
+          }
+            <span>&rarr;</span>
+          </button>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>

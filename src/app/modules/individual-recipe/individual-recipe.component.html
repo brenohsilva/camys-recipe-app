@@ -1,0 +1,149 @@
+<app-topbar></app-topbar>
+
+<main style="margin: 5rem">
+  <div class="border-bottom"></div>
+  <div style="margin: 6rem" class="row">
+    <div class="col-sm-8 col-md-8 col-12">
+      <div
+        class="col-12 d-flex align-items-center justify-content-between mb-1 w-75"
+      >
+        <h1>Bobô de Camarão</h1>
+        <div class="d-flex gap-4">
+          <button class="btn rounded-3">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="black"
+            >
+              <path
+                d="M240-144v-600q0-29.7 21.15-50.85Q282.3-816 312-816h336q29.7 0 50.85 21.15Q720-773.7 720-744v600l-240-96-240 96Zm72-107 168-67 168 67v-493H312v493Zm0-493h336-336Z"
+              />
+            </svg>
+          </button>
+          <button class="btn rounded-3">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="black"
+            >
+              <path
+                d="m480-144-50-45q-100-89-165-152.5t-102.5-113Q125-504 110.5-545T96-629q0-89 61-150t150-61q49 0 95 21t78 59q32-38 78-59t95-21q89 0 150 61t61 150q0 43-14 83t-51.5 89q-37.5 49-103 113.5T528-187l-48 43Zm0-97q93-83 153-141.5t95.5-102Q764-528 778-562t14-67q0-59-40-99t-99-40q-35 0-65.5 14.5T535-713l-35 41h-40l-35-41q-22-26-53.5-40.5T307-768q-59 0-99 40t-40 99q0 33 13 65.5t47.5 75.5q34.5 43 95 102T480-241Zm0-264Z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="col-12 mb-2">
+        <div class="d-flex gap-1">
+          <span class="material-symbols-outlined"> star </span>
+          <span class="material-symbols-outlined"> star </span>
+          <span class="material-symbols-outlined"> star </span>
+          <span class="material-symbols-outlined"> star </span>
+          <span class="material-symbols-outlined"> star </span>
+          <span class="text-decoration-underline">5.0</span>
+          <span>(4)</span>
+        </div>
+        <div class="mt-2">
+          <span>Criado por: <strong>Administrador</strong></span>
+        </div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="col-12 w-75 mb-2">
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam
+          eaque illum, quidem earum nisi neque rerum accusamus sunt,
+          consequuntur officiis in, aut nulla ullam praesentium ipsum. Rem
+          possimus animi ab.
+        </p>
+      </div>
+      <div class="col-12 d-flex justify-content-start mb-4">
+        <img
+          class="rounded-2"
+          src="https://jornadadiscover.com.br/wordpress/wp-content/files/jornadadiscover.com.br/2024/01/bobo-de-camarao-768x512.jpg"
+          alt=""
+          srcset=""
+        />
+      </div>
+      <div class="col-12 w-75">
+        <h2>Ingredientes</h2>
+        <div class="d-flex justify-content-center gap-5">
+          <div class="mx-4">
+            <h5>
+              <hr class="w-25" />
+              Massa
+            </h5>
+            <div class="d-flex flex-column gap-2 mt-4">
+              @for (item of ingredients; track $index) {
+              <span>{{ item }}</span>
+              }
+            </div>
+          </div>
+          <div class="mx-4">
+            <h5>
+              <hr class="w-25" />
+              Recheio
+            </h5>
+            <div class="d-flex flex-column gap-2 mt-4">
+              @for (item of ingredients; track $index) {
+              <span>{{ item }}</span>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mt-5 w-75">
+        <h3>Passo a Passo</h3>
+        <div class="mx-4">
+          <h5>
+            <hr class="w-25" />
+            Massa
+          </h5>
+          <div class="gap-2 mt-4">
+            @for (item of steps; track $index) {
+            <div class="d-flex flex-column mt-2">
+              <div class="d-flex gap-3 form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input border border-black"
+                  [(ngModel)]="completedSteps[$index]"
+                />
+                <strong trong>Passo {{ $index + 1 }}</strong>
+              </div>
+              <span>{{ item }}</span>
+            </div>
+            }
+          </div>
+        </div>
+        <div class="mx-4">
+          <h5>
+            <hr class="w-25" />
+            Recheio
+          </h5>
+          <div class="d-flex flex-column gap-2 mt-4">
+            @for (item of steps; track $index) {
+            <strong>Passo {{ $index }}</strong>
+            <span>{{ item }}</span>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-sm-3  d-none d-sm-flex d-md-flex justify-content-center "
+    >
+      <div style="background-color: #fbf8f3" class="rounded-2 p-3 h-25">
+        <h4>Palavras-chave</h4>
+        <div class="d-flex flex-column  gap-2 mt-4">
+          <span style="width: fit-content;" class="bg-primary p-1 px-2 rounded-3"> Vegano</span>
+          <span style="width: fit-content;" class="bg-primary p-1 px-2 rounded-3">Almoço</span>
+          <span style="width: fit-content;" class="bg-primary p-1 px-2 rounded-3">no carbo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

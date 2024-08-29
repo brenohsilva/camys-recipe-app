@@ -1,0 +1,179 @@
+<div class="m-3">
+  <app-topbar></app-topbar>
+  <form class="main-container d-flex flex-column align-items-center m-4 p-5">
+    <div class="d-flex justify-content-center mb-5">
+      <h3>Organize aqui as suas informações</h3>
+    </div>
+    <div
+      class="d-flex flex-column align-items-center justify-content-center "
+    >
+      <nav style="min-width: 30rem;" class="navbar navbar-expand bg-primary-subtle rounded-4">
+        <div class="container">
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a
+                  (click)="changingMenu('personal')"
+                  class="nav-link fw-medium"
+                  [ngClass]="menuNav === 'personal' ? 'active' : ''"
+                  style="cursor: pointer"
+                  aria-current="page"
+                  >Informações pessoais</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  (click)="changingMenu('email')"
+                  class="nav-link fw-medium"
+                  [ngClass]="menuNav === 'email' ? 'active' : ''"
+                  style="cursor: pointer"
+                  >E-mail</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  (click)="changingMenu('password')"
+                  class="nav-link fw-medium"
+                  [ngClass]="menuNav === 'password' ? 'active' : ''"
+                  style="cursor: pointer"
+                  >Senha</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div style="min-height: 22rem;">
+        <div *ngIf="menuNav === 'personal'" class="">
+          <div class="rounded-4 p-3 px-4 bg-white">
+            <div class="row w-100">
+              <div class="col-12 mt-2">
+                <div class="row d-flex justify-content-center">
+                  <div class="col-12 d-flex flex-column w-75">
+                    <div class="mb-3">
+                      <label for="first_name" class="form-label text-black-50">Nome</label>
+                      <input
+                        class="form-control fs-6 border-secondary rounded-3 p-2 px-3"
+                        placeholder="Digite aqui o seu novo nome"
+                        aria-describedby="nameHelpBlock"
+                        type="text"
+                        name="first_name"
+                        required
+                        id="first_name"
+                        [(ngModel)]="myProfile.first_name"
+                      />
+                    </div>
+                  </div>
+  
+                  <div class="col-12 mb-3 w-75">
+                    <label for="last_name" class="form-label text-black-50">Sobrenome</label>
+                    <input
+                      class="form-control fs-6 border-secondary rounded-3 p-2 px-3"
+                      placeholder="Digite aqui o seu sobrenome "
+                      type="lastname"
+                      name="lastname2"
+                      id="lastname2"
+                      [(ngModel)]="myProfile.last_name"
+                      required
+                    />
+                    
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="menuNav === 'email'" class="">
+          <div class="col-12 d-flex flex-column p-3 mt-2">
+            <span
+              >Seu endereço de e-mail atual é
+              <strong>{{myProfile.email}}</strong>
+            </span>
+            <div class="rounded-4 p-3 px-4 bg-white">
+              <div class="row w-100">
+                <div class="col-12 mt-2">
+                  <div class="row d-flex justify-content-center">
+                    <div class="col-12 d-flex flex-column">
+                      <div class="input-group mb-3">
+                        <input
+                          class="form-control fs-6 border-secondary rounded-3 p-2 px-3"
+                          placeholder="Digite aqui o seu novo e-mail"
+                          type="email"
+                          name="email"
+                          [(ngModel)]="myProfile.email"
+                          required
+                          id="email"
+                        />
+                        <div class="invalid-feedback">
+                          Por favor, digite um e-mail válido.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="menuNav === 'password'">
+          <div class="row">
+            <div class="col-12 mb-4 d-flex justify-content-center p-3">
+              <div class=" w-75">
+                <label for="current-password" class="form-label text-black-50">Senha</label>
+                <input
+                  class="form-control fs-6 border-secondary rounded-3 p-2 px-3"
+                  placeholder="Digite a sua senha atual"
+                  type="password"
+                  name="current-password"
+                  required
+                  id="current-password"
+                  [(ngModel)]="currentPassword"
+                />
+              </div>
+            </div>
+            <hr />
+            <div
+              class="d-flex flex-column align-content-center align-items-center justify-content-center"
+            >
+              <div class="col-12 mb-3 mt-3 w-75">
+                <label for="new-password" class="form-label text-black-50" aria-describedby="passwordHelpBlock">Nova senha</label>
+                <input
+                  class="form-control fs-6 border-secondary rounded-3 p-2 px-3"
+                  placeholder="Digite aqui a sua nova senha "
+                  type="password"
+                  name="new-password"
+                  id="new-password"
+                  required
+                  [(ngModel)]="newPassword"
+                />
+                
+              </div>
+              <div class="col-12 mb-3 w-75">
+                <label for="new-password" class="form-label text-black-50">Repita a nova senha</label>
+                <input
+                  class="form-control fs-6 border-secondary rounded-3 p-2 px-3"
+                  placeholder="Confirme a sua senha  "
+                  type="password"
+                  name="new_password2"
+                  id="new_password2"
+                  required
+                  [(ngModel)]="repeatNewPassword"
+                />
+                
+              </div>
+              @if (!checkPasswords) {
+                <div class="text-danger ">As senhas não correspondem</div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mt-5">
+        <div class="d-flex justify-content-end">
+          <button (click)="updateProfile(menuNav)" class="btn btn-primary">Salvar alterações</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
