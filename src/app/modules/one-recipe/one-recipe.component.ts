@@ -13,7 +13,7 @@ export class OneRecipeComponent {
   recipe: any[] = [
     {
       title: 'Torta de frango',
-      time: '45 minutos',
+      time: 45,
       people: 4,
       type: 1,
       cateogory: 'Sobremesa',

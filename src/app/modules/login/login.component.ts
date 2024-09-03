@@ -5,11 +5,12 @@ import { ISignIn } from '../../interfaces/signIn.interface';
 import { Route, Router } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { TopbarComponent } from "../topbar/topbar.component";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, NgClass],
+  imports: [FormsModule, NgClass, TopbarComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

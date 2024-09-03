@@ -3,7 +3,7 @@
     <div 
       class="d-flex flex-column m-4 align-items-center justify-content-center"
     >
-      <div class="m-4">
+      <div class="">
         <div class="d-flex justify-content-center">
           <img class="" src="../../../assets/plate.png" width="40%" alt="" />
         </div>
@@ -15,10 +15,10 @@
             <h3>{{ recipe[0].title }}</h3>
             <div class="d-flex gap-4 m-2">
               <div
-                class="d-flex flex-column justify-content-center align-items-center m-2 p-2"
+                class="d-flex flex-column justify-content-center align-items-center m-1"
               >
                 <span class="material-symbols-outlined">schedule</span>
-                <span class="mt-2"> {{ recipe[0].time }}</span>
+                <span class="mt-2"> {{ recipe[0].time }} min</span>
               </div>
               <div class="vr mt-3" style="height: 50px"></div>
               <div
@@ -39,7 +39,7 @@
               [ngClass]="typeOfIngredients ? 'btn-primary' : ''"
               class="btn px-3 rounded-5 text-black text-decoration-none"
             >
-              <span style="font-size: 16px;">Ingredientes</span>
+              <span >Ingredientes</span>
             </button>
             <button
               (click)="changingToSteps()"
@@ -97,7 +97,7 @@
 
           <div
             [ngClass]="typeOfSteps ? '' : 'd-none'"
-            class="d-flex flex-column w-100 px-4 gap-3"
+            class="d-flex flex-column w-100 px-4 gap-3 mt-2"
           >
             @if (dough) { @for (steps of recipe[0].typeOfSteps[0].dough; let idx
             = $index ;track steps.name) {

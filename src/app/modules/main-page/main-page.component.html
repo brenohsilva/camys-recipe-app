@@ -2,36 +2,33 @@
   <main class="container-fluid m-3">
     <app-topbar></app-topbar>
     <div class=" d-flex flex-column align-items-center ">
-      <div class="my-5 mx-5">
+      <div class="d-none d-md-flex my-5 mx-5">
         <img  src="../../../assets/main_image.png" width="100%" alt="">
+      </div>
+      <div class="d-flex d-md-none my-5 mx-5">
+        <h1 style="font-size: 40px;" class=" my-5">O melhor lugar para encontrar  <br> <strong class="fst-italic text-primary-emphasis">suas Receitas.</strong></h1>
       </div>
   
       <div class="d-flex gap-3 p-2 px-4 rounded-3">
-        <div class="bg-primary-subtle p-1 px-3 rounded-4">
-          <a class="link-offset-2 link-underline link-underline-opacity-0" href="">
-            <span class="text-black">Café da manhã</span>
+        <div class="row ">
+          <a class=" d-flex justify-content-center col link-offset-2 link-underline link-underline-opacity-0" href="">
+            <h5><span class="badge text-bg-secondary">Café da manhã</span></h5>
+          </a>    
+          <a class=" d-flex justify-content-center col link-offset-2 link-underline link-underline-opacity-0" href="">
+            <h5><span class="badge text-bg-secondary">Almoço</span></h5>
           </a>
-        </div>
-        <div class="bg-primary-subtle p-1 px-3 rounded-4">
-          <a class="link-offset-2 link-underline link-underline-opacity-0" href="">
-            <span class="text-black">Almoço</span>
+          <a class=" d-flex justify-content-center col link-offset-2 link-underline link-underline-opacity-0" href="">
+            <h5><span class="badge text-bg-secondary">Jantar</span></h5>
           </a>
-        </div>
-        <div class="bg-primary-subtle p-1 px-3 rounded-4">
-          <a class="link-offset-2 link-underline link-underline-opacity-0" href="">
-            <span class="text-black">Jantar</span>
-          </a>
-        </div>
-        <div class="bg-primary-subtle p-1 px-3 rounded-4">
-          <a class="link-offset-2 link-underline link-underline-opacity-0" href="">
-            <span class="text-black">Sobremesa</span>          
+          <a class=" d-flex justify-content-center  col link-offset-2 link-underline link-underline-opacity-0" href="">
+            <h5><span class="badge text-bg-secondary">Sobremesa</span></h5>
           </a>
         </div>
       </div>
     </div>
     <div class="d-flex row justify-content-center align-items-center gap-5 py-4 m-4 ">
       @for (recipe of paginatedRecipes; track $index) {
-        <div class=" col-3 p-0 rounded-4">
+        <div class=" col p-0 rounded-4">
             <div
                 class="rounded-4"
                 style="width: 100%; height: 220px; overflow: hidden"
@@ -83,7 +80,7 @@
         </nav>
       </div>
       </div>
-    <footer class="m-auto w-75 ">
+    <footer class="m-auto w-75 mb-3 ">
       <div class=" m-auto d-flex justify-content-end gap-3">
         <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="M320-120q-84 0-142-58t-58-142v-320q0-84 58-142t142-58h320q84 0 142 58t58 142v320q0 84-58 142t-142 58H320Zm0-80h320q51 0 85.5-34.5T760-320v-320q0-51-34.5-85.5T640-760H320q-51 0-85.5 34.5T200-640v320q0 51 34.5 85.5T320-200Zm160-80q-84 0-142-58t-58-142q0-84 58-142t142-58q84 0 142 58t58 142q0 84-58 142t-142 58Zm0-80q51 0 85.5-34.5T600-480q0-51-34.5-85.5T480-600q-51 0-85.5 34.5T360-480q0 51 34.5 85.5T480-360Z"/></svg>
   

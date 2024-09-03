@@ -1,11 +1,12 @@
-<div>
-  <div class="d-flex flex-column m-5 p-5 justify-content-center">
-    <div class="d-flex justify-content-center">
+<app-topbar></app-topbar>
+<main class="container">
+  <div class="d-flex flex-column mt-5 m-auto py-5 justify-content-center">
+    <div class="d-flex justify-content-center text-center">
       <h3>Adicione aqui a sua receita</h3>
     </div>
     <div class="border-danger">
       <main class="container mt-4">
-        <div class="d-flex justify-content-center mb-4">
+        <div class="d-none d-md-flex d-lg-flex justify-content-center mb-4">
           <div class="step" [ngClass]="{ active: currentStep === 1 }">
             <div class="step-number">1</div>
             <div class="step-title">Informações principais</div>
@@ -28,7 +29,7 @@
           />
           <div class="step" [ngClass]="{ active: currentStep === 3 }">
             <div class="step-number">3</div>
-            <div class="step-title">Passo a Passo</div>
+            <div class="step-title">Passos</div>
           </div>
           <hr
             [ngClass]="{
@@ -41,10 +42,30 @@
             <div class="step-title">Finalização</div>
           </div>
         </div>
+        <div class="d-flex d-md-none d-lg-none mb-3 justify-content-center">
+          <ng-container [ngSwitch]="currentStep">
+            <div class="step active" *ngSwitchCase="1" >
+              <div class="step-number">1</div>
+              <div class="step-title">Informações principais</div>
+            </div>
+            <div class="step active" *ngSwitchCase="2" >
+              <div class="step-number">2</div>
+              <div class="step-title">Ingredientes</div>
+            </div>
+            <div class="step active" *ngSwitchCase="3" >
+              <div class="step-number">3</div>
+              <div class="step-title">Passo a Passo</div>
+            </div>
+            <div class="step active" *ngSwitchCase="4" >
+              <div class="step-number">4</div>
+              <div class="step-title">Finalização</div>
+            </div>
+          </ng-container>
+        </div>
         <div class="content border-primary p-4">
           <ng-container [ngSwitch]="currentStep">
             <div class="row" *ngSwitchCase="1">
-              <div class="col">
+              <div class="col-12 col-md-12 col-lg">
                 <div class="mb-2">
                   <span class="" id="name">Nome da receita </span>
                   <div class="input-group input-group-sm mb-2 mt-1 w-50">
@@ -62,7 +83,7 @@
                     <textarea
                       id="description"
                       class="form-control border border-black"
-                      aria-label="Sizing example input"
+                      
                       aria-describedby="inputGroup-sizing-sm"
                     ></textarea>
                     <label for="floatingTextarea"
@@ -77,7 +98,7 @@
                       [(ngModel)]="urlImage"
                       type="text"
                       class="form-control border border-black"
-                      aria-label="Sizing example input"
+                      aria-describedby="inputGroup-sizing-sm"
                       placeholder="Adicione aqui uma url de imagem"
                     />
                   </div>
@@ -86,7 +107,6 @@
                   <span class="" id="recipe-image">Tipo </span>
                   <select
                     class="form-select form-select mt-1 w-50 border border-black"
-                    aria-label="Small select example"
                   >
                     <option selected>Selecione um tipo</option>
                     <option value="1">Apenas massa</option>
@@ -120,7 +140,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col">
+              <div class="col -12 col-md-12 col-lg">
                 <div class="d-flex justify-content-center mt-4">
                   @if (urlImage) {
                   <img [src]="urlImage" width="50%" alt="" srcset="" />
@@ -141,10 +161,11 @@
               </div>
             </div>
             <div class="row" *ngSwitchCase="2">
-              <div class="col">
+              <div class="ing col-12 col-md-12 col-lg">
                 <span class="" id="name">Adicione aqui seus ingredientes </span>
                 <div class="mb-2 mt-2">
-                  <select style="width: 18%;"
+                  <select
+                    style="width: 30%"
                     class="form-select-sm form-select mt-1 border border-black"
                     aria-label="Small select example"
                     [(ngModel)]="typeIngredients"
@@ -152,7 +173,6 @@
                     <option selected>Tipo</option>
                     <option value="1">Massa</option>
                     <option value="2">Recheio</option>
-                    
                   </select>
                 </div>
                 <div class="input-group input-group-sm mb-2 mt-1 w-50">
@@ -171,24 +191,22 @@
                   </button>
                 </div>
               </div>
-              <div class="col">
+              <div class="ing col-12 col-md-12 col-lg">
                 <span>Ingredientes</span>
                 <div
-                  style="
-                    height: 20rem;
-                    width: 30rem;
-                    border: 1px dashed rgb(211, 210, 210);
-                  "
+                  style="height: 20rem; border: 1px dashed rgb(209, 137, 29)"
                   class="mt-2 p-2 d-flex flex-column"
                 >
                   @for (item of ingredients; track $index) {
                   <span
-                  [ngClass]="item.type === '1' ? 'bg-primary' : 'bg-secondary' "
-                    class=" d-flex align-content-center align-items-center justify-content-center gap-1 rounded-3 p-0 px-2 m-1"
+                    [ngClass]="
+                      item.type === '1' ? 'bg-primary' : 'bg-secondary'
+                    "
+                    class="d-flex align-content-center align-items-center justify-content-center gap-1 rounded-3 p-0 px-2 m-1"
                     style="width: fit-content"
                     >{{ item.name }}
                     <svg
-                    (click)="removeIngredient($index)"
+                      (click)="removeIngredient($index)"
                       xmlns="http://www.w3.org/2000/svg"
                       height="20px"
                       viewBox="0 -960 960 960"
@@ -205,10 +223,11 @@
               </div>
             </div>
             <div class="row" *ngSwitchCase="3">
-              <div class="col">
+              <div class="ing col-12 col-md-12 col-lg">
                 <span class="" id="name">Adicione aqui o passo a passo </span>
                 <div class="mb-2 mt-2">
-                  <select style="width: 18%;"
+                  <select
+                    style="width: 30%"
                     class="form-select-sm form-select mt-1 border border-black"
                     aria-label="Small select example"
                     [(ngModel)]="typeIngredients"
@@ -216,7 +235,6 @@
                     <option selected>Tipo</option>
                     <option value="1">Massa</option>
                     <option value="2">Recheio</option>
-                    
                   </select>
                 </div>
                 <div class="d-flex align-content-center align-items-center">
@@ -228,37 +246,41 @@
                       aria-label="Sizing example input"
                       aria-describedby="inputGroup-sizing-sm"
                     ></textarea>
-                    <label for="floatingTextarea"
+                    <label class="d-none d-md-flex d-lg-flex" for="floatingTextarea"
                       >Descreva aqui o passo a passo</label
                     >
+                    <label class="d-flex d-md-none d-lg-none" for="floatingTextarea"
+                      >Seu passo a passo</label
+                    >
                   </div>
-                  <button style="height: 40px;"
+                  <button
+                    style="height: 40px"
                     (click)="addIngredient(typeIngredients)"
                     class="btn bg-primary rounded-2 ms-1"
                   >
                     +
                   </button>
                 </div>
-               
               </div>
-              <div class="col">
+              <div class="ing col-12 col-md-12 col-lg">
                 <span>Passo a Passo</span>
                 <div
                   style="
                     height: 20rem;
-                    width: 30rem;
-                    border: 1px dashed rgb(211, 210, 210);
+                    border: 1px dashed  rgb(209, 137, 29);
                   "
                   class="mt-2 p-2 d-flex flex-column"
                 >
                   @for (item of ingredients; track $index) {
                   <span
-                  [ngClass]="item.type === '1' ? 'bg-primary' : 'bg-secondary' "
-                    class=" d-flex align-content-center align-items-center justify-content-center gap-1 rounded-3 p-0 px-2 m-1"
+                    [ngClass]="
+                      item.type === '1' ? 'bg-primary' : 'bg-secondary'
+                    "
+                    class="d-flex align-content-center align-items-center justify-content-center gap-1 rounded-3 p-0 px-2 m-1"
                     style="width: fit-content"
                     >{{ item.name }}
                     <svg
-                    (click)="removeIngredient($index)"
+                      (click)="removeIngredient($index)"
                       xmlns="http://www.w3.org/2000/svg"
                       height="20px"
                       viewBox="0 -960 960 960"
@@ -274,18 +296,22 @@
                 </div>
               </div>
             </div>
-            <div class="row" *ngSwitchCase="4">
+            <div  *ngSwitchCase="4">
               <div class="d-flex justify-content-center">
                 <h5>Adicione as categorias da sua receita</h5>
               </div>
-              <div class="d-flex justify-content-center mt-2"> @for (item of categories; track $index) {
-                <button class="btn bg-primary-subtle p-1 px-2 m-1 rounded-4"
-                [ngClass]="{
-                  'bg-primary-subtle': !selectedCategories.includes(item),
-                  'bg-primary text-white': selectedCategories.includes(item)
-                }"
-                (click)="toggleCategory(item)"
-                >{{item}}</button>
+              <div class="row mt-2">
+                @for (item of categories; track $index) {
+                <button style="max-width: fit-content;"
+                  class=" col btn bg-primary-subtle p-1 px-2 m-1 rounded-4"
+                  [ngClass]="{
+                    'bg-primary-subtle': !selectedCategories.includes(item),
+                    'bg-primary text-white': selectedCategories.includes(item)
+                  }"
+                  (click)="toggleCategory(item)"
+                >
+                  {{ item }}
+                </button>
                 }
               </div>
             </div>
@@ -314,20 +340,17 @@
           >
             <span>&larr;</span> Voltar
           </button>
-          <button
-            class="btn btn-primary d-flex gap-1"
-            (click)="nextStep()"
-          > 
-          @if (currentStep === 4) {
+          <button class="btn btn-primary d-flex gap-1" (click)="nextStep()">
+            @if (currentStep === 4) {
             <span>Finalizar</span>
 
-          } @else {
-            <span >Avançar</span> 
-          }
+            } @else {
+            <span>Avançar</span>
+            }
             <span>&rarr;</span>
           </button>
         </div>
       </main>
     </div>
   </div>
-</div>
+</main>

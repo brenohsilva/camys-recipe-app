@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
         progressBar: true
       });
      }, (error) => {
-      this.toastr.error('', 'Por favor, entre novamente', {
+      this.toastr.error('Por favor, tente novamente', 'Falha ao atualizar', {
         progressBar: true
       })
      }

@@ -17,13 +17,13 @@ interface Ingredients {
 })
 
 export class StepperComponent {
-  currentStep: number = 4;
+  currentStep: number = 1;
   urlImage!: string
 
   ingredient!: string
   ingredients: Ingredients[] = []
   typeIngredients = 'Tipo'
-  categories: string[] = ["Café da Manhã", "Almoço", "Jantar", "Sobremesa", "Doce", "Salgados", "Fitness", "No Carbo"]
+  categories: string[] = ["Café", "Almoço", "Jantar", "Sobremesa", "Doce", "Salgados", "Fitness", "No Carbo"]
   selectedCategories: string[] = [];
 
   addIngredient(type: string){

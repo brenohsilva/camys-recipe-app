@@ -20,7 +20,7 @@ export class MainPageComponent implements OnInit {
 
   currentPage: number = 1;
   itemsPerPage: number = 3;
-  isLoading = false
+  isLoading = true
   
   recipes: any[] = [
     {
@@ -84,10 +84,10 @@ export class MainPageComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    setTimeout(() => {
+    // setTimeout(() => {
       
-      this.isLoading = true
-    }, 2000);
+    //   this.isLoading = true
+    // }, 2000);
   }
 
   get paginatedRecipes() {

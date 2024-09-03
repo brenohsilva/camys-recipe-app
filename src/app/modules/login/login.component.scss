@@ -2,6 +2,10 @@
   height: 100vh;
 }
 
+.login-form {
+  width: 50vw;
+}
+
 .main-container::before{
   content: ''; /* Adiciona um conteúdo vazio para o pseudo-elemento */
   position: absolute; /* Posiciona o pseudo-elemento absolutamente em relação ao seu pai */
@@ -15,20 +19,9 @@
   z-index: -1;
 }
 
-.form-signin {
-    max-width: 800px;
+
+@media screen and (max-width: 1292px){
+  .login-form {
+    width: 75vw;
   }
-  
-  .form-signin .form-floating:focus-within {
-    z-index: 2;
-  }
-  
-  .form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-  
-  .form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0}
+}
