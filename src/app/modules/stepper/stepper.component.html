@@ -74,6 +74,7 @@
                       class="form-control border border-black"
                       aria-label="Sizing example input"
                       aria-describedby="inputGroup-sizing-sm"
+                      [(ngModel)]=" recipe.name"
                     />
                   </div>
                 </div>
@@ -81,10 +82,11 @@
                   <span class="" id="name">Descrição </span>
                   <div class="form-floating mb-2 mt-1 w-75">
                     <textarea
+                      style="max-height: fit-content; "
+                      (input)="autoResize($event)"
                       id="description"
                       class="form-control border border-black"
-                      
-                      aria-describedby="inputGroup-sizing-sm"
+                      [(ngModel)]=" recipe.description"
                     ></textarea>
                     <label for="floatingTextarea"
                       >Descreva aqui a sua receita</label
@@ -95,7 +97,7 @@
                   <span class="" id="recipe-image">Imagem </span>
                   <div class="mt-1 w-75">
                     <input
-                      [(ngModel)]="urlImage"
+                      [(ngModel)]="recipe.urlImage"
                       type="text"
                       class="form-control border border-black"
                       aria-describedby="inputGroup-sizing-sm"
@@ -105,10 +107,10 @@
                 </div>
                 <div class="mb-2">
                   <span class="" id="recipe-image">Tipo </span>
-                  <select
+                  <select  [(ngModel)]=" recipe.type"
                     class="form-select form-select mt-1 w-50 border border-black"
                   >
-                    <option selected>Selecione um tipo</option>
+                  <option value="Selecione um tipo">Selecione um tipo</option>
                     <option value="1">Apenas massa</option>
                     <option value="2">Massa e Recheio</option>
                   </select>
@@ -117,9 +119,10 @@
                   <span class="" id="recipe-image">Porção </span>
                   <select
                     class="form-select form-select mt-1 w-50 border border-black"
-                    aria-label="Small select example"
+                    aria-label="Small select "
+                    [(ngModel)]=" recipe.portion"
                   >
-                    <option selected>Serve quantas pessoas?</option>
+                    <option value="Serve quantas pessoas">Serve quantas pessoas?</option>
                     <option value="1">1 Pessoa</option>
                     <option value="2">2 Pessoas</option>
                     <option value="3">3 Pessoas</option>
@@ -131,6 +134,7 @@
                   <span class="" id="recipe-image">Tempo </span>
                   <div class="input-group mb-3 mt-1 w-50">
                     <input
+                    [(ngModel)]=" recipe.time"
                       type="number"
                       class="form-control border border-black"
                     />
@@ -142,8 +146,8 @@
               </div>
               <div class="col -12 col-md-12 col-lg">
                 <div class="d-flex justify-content-center mt-4">
-                  @if (urlImage) {
-                  <img [src]="urlImage" width="50%" alt="" srcset="" />
+                  @if (recipe.urlImage) {
+                  <img [src]="recipe.urlImage" width="50%" alt="" srcset="" />
                   } @else {
                   <div
                     style="
@@ -194,8 +198,11 @@
               <div class="ing col-12 col-md-12 col-lg">
                 <span>Ingredientes</span>
                 <div
-                  style="height: 20rem; border: 1px dashed rgb(209, 137, 29)"
-                  class="mt-2 p-2 d-flex flex-column"
+                  style="
+                    overflow: scroll;
+                    height: 20rem;
+                    border: 1px dashed rgb(209, 137, 29)"
+                  class=" mt-2 p-2 d-flex flex-column"
                 >
                   @for (item of ingredients; track $index) {
                   <span
@@ -240,13 +247,13 @@
                 <div class="d-flex align-content-center align-items-center">
                   <div class="form-floating mb-2 mt-1 w-50">
                     <textarea
-                      [(ngModel)]="ingredient"
+                      style="max-height: fit-content; "
+                      [(ngModel)]="step"
+                      (input)="autoResize($event)"
                       id="step"
                       class="form-control border border-black"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-sm"
                     ></textarea>
-                    <label class="d-none d-md-flex d-lg-flex" for="floatingTextarea"
+                    <label class="d-none d-md-flex d-lg-flex mb-2" for="floatingTextarea"
                       >Descreva aqui o passo a passo</label
                     >
                     <label class="d-flex d-md-none d-lg-none" for="floatingTextarea"
@@ -255,7 +262,7 @@
                   </div>
                   <button
                     style="height: 40px"
-                    (click)="addIngredient(typeIngredients)"
+                    (click)="addStepper(typeIngredients)"
                     class="btn bg-primary rounded-2 ms-1"
                   >
                     +
@@ -266,21 +273,22 @@
                 <span>Passo a Passo</span>
                 <div
                   style="
+                    overflow: scroll;
                     height: 20rem;
                     border: 1px dashed  rgb(209, 137, 29);
                   "
                   class="mt-2 p-2 d-flex flex-column"
                 >
-                  @for (item of ingredients; track $index) {
+                  @for (item of steppers; track $index) {
                   <span
                     [ngClass]="
                       item.type === '1' ? 'bg-primary' : 'bg-secondary'
                     "
-                    class="d-flex align-content-center align-items-center justify-content-center gap-1 rounded-3 p-0 px-2 m-1"
+                    class="d-flex align-content-center align-items-center justify-content-center gap-1 rounded-3 p-0 py-1 px-2 m-1"
                     style="width: fit-content"
                     >{{ item.name }}
                     <svg
-                      (click)="removeIngredient($index)"
+                      (click)="removeStepper($index)"
                       xmlns="http://www.w3.org/2000/svg"
                       height="20px"
                       viewBox="0 -960 960 960"
@@ -305,31 +313,38 @@
                 <button style="max-width: fit-content;"
                   class=" col btn bg-primary-subtle p-1 px-2 m-1 rounded-4"
                   [ngClass]="{
-                    'bg-primary-subtle': !selectedCategories.includes(item),
-                    'bg-primary text-white': selectedCategories.includes(item)
+                    'bg-primary-subtle': !selectedCategories.includes(item.name),
+                    'bg-primary text-white': selectedCategories.includes(item.name)
                   }"
                   (click)="toggleCategory(item)"
                 >
-                  {{ item }}
+                  {{ item.name }}
                 </button>
                 }
               </div>
             </div>
-            <!-- <div class="row" *ngSwitchCase="4">
-              <div class="d-flex justify-content-center">
-                <h4>Parabéns!!</h4>
-              </div>
-              <div class="d-flex justify-content-center">
-                <img src="../../../assets/success.png" alt="" srcset="" width="30%">
-              </div>
-              <div class="d-flex justify-content-center">
-                <p class="fw-bold"> Receita adiionada com sucesso, venha ver como ficou essa delicia!</p>
-              </div>
-              <div class="d-flex justify-content-center">
-                <p>Ir para receitas.</p>
-              </div>
-              
-            </div> -->
+            <div *ngSwitchCase="6" >
+              @if (loading) {
+                <div class="d-flex flex-column justify-content-center align-content-center align-items-center my-5">
+                  <app-loading></app-loading>
+                </div>
+              }
+              @if (!loading) {
+                <div class="d-flex justify-content-center">
+                  <h4>Parabéns!!</h4>
+                </div>
+                <div class="d-flex justify-content-center">
+                  <img src="../../../assets/success.png" alt="" srcset="" width="30%">
+                </div>
+                <div class="d-flex justify-content-center">
+                  <p class="fw-bold"> Receita adiionada com sucesso, venha ver como ficou essa delicia!</p>
+                </div>
+                <div class="d-flex justify-content-center">
+                  <p>Ir para receitas.</p>
+                </div>
+              }
+                
+            </div>
           </ng-container>
         </div>
         <div class="d-flex justify-content-between mt-4">
@@ -340,8 +355,8 @@
           >
             <span>&larr;</span> Voltar
           </button>
-          <button class="btn btn-primary d-flex gap-1" (click)="nextStep()">
-            @if (currentStep === 4) {
+          <button class="btn btn-primary d-flex gap-1" [disabled]="currentStep === 6" (click)="nextStep()">
+            @if (currentStep === 4 || currentStep === 6) {
             <span>Finalizar</span>
 
             } @else {

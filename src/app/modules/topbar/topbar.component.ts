@@ -32,6 +32,10 @@ export class TopbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  createRecipe(){
+    this.router.navigate(['/stepper'])
+  }
+
   login(){
     this.router.navigate(['/login'])
   }

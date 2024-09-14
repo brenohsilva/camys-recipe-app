@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { TopbarComponent } from "../topbar/topbar.component";
 import { FavoriteEmptyComponent } from "../favorite-empty/favorite-empty.component";
 import { MatDialog } from '@angular/material/dialog';
-import { FavoriteDialogComponent } from '../dialog/favorite-dialog/favorite-dialog.component';
+import { FavoriteDialogComponent } from '../dialogs/favorite-dialog/favorite-dialog.component';
 
 @Component({
   selector: 'app-favorites',

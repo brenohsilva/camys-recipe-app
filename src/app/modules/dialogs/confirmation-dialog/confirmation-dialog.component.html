@@ -1,0 +1,10 @@
+<div >
+    <h2 mat-dialog-title>Salvar Receita</h2>
+    <mat-dialog-content>
+     Você está prestes a criar a sua receita, as informações estão corretas?
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button (click)="onCancel()" mat-button mat-dialog-close class="bg-primary-subtle">Não</button>
+      <button (click)="onConfirm()" mat-button mat-dialog-close cdkFocusInitial class="bg-primary">Sim</button>
+    </mat-dialog-actions>
+</div>
