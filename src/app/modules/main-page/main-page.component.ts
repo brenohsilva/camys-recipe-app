@@ -7,6 +7,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { RecipeComponent } from '../recipe/recipe.component';
 import { OneRecipeComponent } from '../one-recipe/one-recipe.component';
+import { RecipeHttpService } from '../../services/recipe.service';
+import { Recipe } from '../../interfaces/recipe.interface';
 
 @Component({
   selector: 'app-main-page',
@@ -17,73 +19,29 @@ import { OneRecipeComponent } from '../one-recipe/one-recipe.component';
 })
 export class MainPageComponent implements OnInit {
   readonly dialog = inject(MatDialog);
+  constructor(private readonly recipeService: RecipeHttpService){}
 
   currentPage: number = 1;
-  itemsPerPage: number = 3;
+  itemsPerPage: number = 6;
   isLoading = true
   
-  recipes: any[] = [
-    {
-      title: 'Torta de frango',
-      time: '45 min',
-      image: '../../../assets/tortaImg.jpg',
-    },
-    {
-      title: 'Yakisoba',
-      time: '30 min',
-      image: '../../../assets/yaksoba.jpg',
-    },
-    {
-      title: 'Brownie',
-      time: '35 min',
-      image: '../../../assets/brownie.jpg',
-    },
-    {
-      title: 'Tapioca',
-      time: '15 min',
-      image: '../../../assets/tapioca.jpg',
-    },
-    {
-      title: 'Bolo de rolo',
-      time: '120 min',
-      image: '../../../assets/bolorolo.jpg',
-    },
-    {
-      title: 'Macarronada',
-      time: '40 min',
-      image: '../../../assets/macarronada.jpg',
-    },
-    {
-      title: 'Baiao de dois',
-      time: '60 min',
-      image: '../../../assets/baiaodois.jpg',
-    },
-    {
-      title: 'Lasanha',
-      time: '55 min',
-      image: '../../../assets/lasanha.jpg',
-    },
-    {
-      title: 'Pipoca Granulada',
-      time: '15 min',
-      image: '../../../assets/pipoca.jpeg',
-    },
-    {
-      title: 'Bobó de camarão',
-      time: '15 min',
-      image: '../../../assets/bobo.jpg',
-    },
-  ];
+  recipes: Recipe[] = [] 
 
-  openDialog() {
-    const dialogRef = this.dialog.open(OneRecipeComponent);
-
+  openDialog(recipe: any) {
+    const dialogRef = this.dialog.open(OneRecipeComponent, {
+      data: recipe
+    });
+    
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }
   
-  ngOnInit(): void {
+ async ngOnInit(): Promise<void> {
+    const response = await this.recipeService.getAllRecipes()
+    response.subscribe((recipes)=>{
+      this.recipes = recipes
+    })
     // setTimeout(() => {
       
     //   this.isLoading = true

@@ -27,5 +27,6 @@ export class IndividualRecipeComponent {
     'Remove skillet from heat. Stir tomato sauce, tomatoes, feta cheese, pine nuts, and 1/4 cup mint leaves through the lamb mixture; spoon into the zucchini halves. Put stuffed zucchini halves into a large baking dish. Pour water into the baking dish.',
   ];
 
-  completedSteps: boolean[] = new Array(this.steps.length).fill(false);
+  completedStepsMassa: boolean[] = new Array(this.steps.length).fill(false);
+  completedStepsFilling: boolean[] = new Array(this.steps.length).fill(false);
 }

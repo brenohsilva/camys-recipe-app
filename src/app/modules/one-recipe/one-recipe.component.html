@@ -12,20 +12,20 @@
           class="d-flex m-auto flex-column align-items-center rounded-top-3 p-2"
         >
           <div class="d-flex justify-content-center flex-column align-items-center p-2">
-            <h3>{{ recipe[0].title }}</h3>
+            <h3>{{ recipes.name }}</h3>
             <div class="d-flex gap-4 m-2">
               <div
                 class="d-flex flex-column justify-content-center align-items-center m-1"
               >
                 <span class="material-symbols-outlined">schedule</span>
-                <span class="mt-2"> {{ recipe[0].time }} min</span>
+                <span class="mt-2"> {{ recipes.time }} min</span>
               </div>
               <div class="vr mt-3" style="height: 50px"></div>
               <div
                 class="d-flex flex-column justify-content-center align-items-center m-2 p-2"
               >
                 <span class="material-symbols-outlined">person</span>
-                <span class="mt-2"> {{ recipe[0].people }} pessoas</span>
+                <span class="mt-2"> {{ recipes.portions }} pessoas</span>
               </div>
             </div>
           </div>
@@ -51,7 +51,7 @@
           </div>
 
           <div
-            [ngClass]="recipe[0].type == 2 ? '' : 'd-none'"
+            [ngClass]="recipes.type == 2 ? '' : 'd-none'"
             class="d-flex gap-4 rounded-4 p-2 m-2 justify-content-center"
           >
             <div class="p-1 rounded-4" style="background-color: #fae5c7">
@@ -77,20 +77,20 @@
             class="d-flex flex-column justify-content-center align-items-center m-3 gap-3"
           >
             @if (dough) { @for (ingredients of
-            recipe[0].typeOfIngredients[0].dough; track $index) {
+            recipes.ingredients; track $index) {
             <span
               class="p-1 ps-3 pe-3 rounded-5"
               style="background-color: #fae5c7"
             >
-              {{ ingredients.description }}
+              {{ ingredients.name }}
             </span>
             } } @if (filling) { @for (ingredients of
-            recipe[0].typeOfIngredients[0].filling; track $index) {
+            recipes.ingredients; track $index) {
             <span
               class="p-1 ps-3 pe-3 rounded-5"
               style="background-color: #fae5c7"
             >
-              {{ ingredients.description }}
+              {{ ingredients.name }}
             </span>
             } }
           </div>
@@ -99,8 +99,8 @@
             [ngClass]="typeOfSteps ? '' : 'd-none'"
             class="d-flex flex-column w-100 px-4 gap-3 mt-2"
           >
-            @if (dough) { @for (steps of recipe[0].typeOfSteps[0].dough; let idx
-            = $index ;track steps.name) {
+            @if (dough) { @for (steps of recipes.steps; let idx
+            = $index ;track steps.step) {
             <div class="d-flex gap-3 mb-3">
               <div class="">
                 <button
@@ -127,13 +127,13 @@
                   class="p-1 pe-3 rounded-3"
                   style="background-color: #fae5c7"
                 >
-                  <span class="">{{ steps.description }} </span>
+                  <span class="">{{ steps.step }} </span>
                 </div>
               </div>
             </div>
 
-            }} @if (filling) { @for (steps of recipe[0].typeOfSteps[0].filling;
-            let idx = $index; track steps.name) {
+            }} @if (filling) { @for (steps of recipes.steps;;
+            let idx = $index; track steps.step) {
             <div class="d-flex gap-3 mb-3">
               <div class="">
                 <button
@@ -160,7 +160,7 @@
                   class="p-1 pe-3 rounded-3"
                   style="background-color: #fae5c7"
                 >
-                  <span class="">{{ steps.description }} </span>
+                  <span class="">{{ steps.step }} </span>
                 </div>
               </div>
             </div>
@@ -178,7 +178,7 @@
           </button>
           <button
             mat-button
-            
+            [routerLink]="['/recipe', recipes.id]"
             class="btn rounded-4 px-4 py-1 fw-medium fs-6 "
             mat-dialog-close
           >

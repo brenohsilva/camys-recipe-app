@@ -5,7 +5,6 @@ import { AuthHttpService } from "./auth.service";
 import { Router } from "@angular/router";
 
 export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
-    
     const accessToken = inject(AuthHttpService).getAccessToken();
 
     if (accessToken) {
