@@ -6,6 +6,7 @@ export interface Recipe {
     id: number;
     users_id: number;
     name: string;
+    users?: any;
     image: string;
     description: string;
     type: number;

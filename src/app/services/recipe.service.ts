@@ -16,4 +16,8 @@ export class RecipeHttpService {
     getAllRecipes(): Observable<any>{
         return this.http.get<any>(this.endpoint)
     }
+
+    getOneRecipe(id: string): Observable<any>{
+        return this.http.get<any>(`${this.endpoint}/${id}`);
+    }
 }
