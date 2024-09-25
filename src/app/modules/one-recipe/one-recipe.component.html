@@ -77,7 +77,7 @@
             class="d-flex flex-column justify-content-center align-items-center m-3 gap-3"
           >
             @if (dough) { @for (ingredients of
-            recipes.ingredients; track $index) {
+            doughIngredients; track $index) {
             <span
               class="p-1 ps-3 pe-3 rounded-5"
               style="background-color: #fae5c7"
@@ -85,7 +85,7 @@
               {{ ingredients.name }}
             </span>
             } } @if (filling) { @for (ingredients of
-            recipes.ingredients; track $index) {
+            fillingIngredients; track $index) {
             <span
               class="p-1 ps-3 pe-3 rounded-5"
               style="background-color: #fae5c7"
@@ -99,7 +99,7 @@
             [ngClass]="typeOfSteps ? '' : 'd-none'"
             class="d-flex flex-column w-100 px-4 gap-3 mt-2"
           >
-            @if (dough) { @for (steps of recipes.steps; let idx
+            @if (dough) { @for (steps of doughSteps; let idx
             = $index ;track steps.step) {
             <div class="d-flex gap-3 mb-3">
               <div class="">
@@ -132,7 +132,7 @@
               </div>
             </div>
 
-            }} @if (filling) { @for (steps of recipes.steps;;
+            }} @if (filling) { @for (steps of fillingSteps;;
             let idx = $index; track steps.step) {
             <div class="d-flex gap-3 mb-3">
               <div class="">

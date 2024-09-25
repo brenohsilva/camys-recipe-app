@@ -30,6 +30,23 @@ export class OneRecipeComponent implements OnInit {
   check!: string
   selectedStepIds: number[] = [];
 
+  get doughIngredients() {
+    return this.recipes.ingredients.filter(i => i.type === 'massa');
+  }
+
+  get fillingIngredients() {
+    return this.recipes.ingredients.filter(i => i.type === 'recheio');
+  }
+
+  get doughSteps() {
+    return this.recipes.steps.filter(i => i.type === 'massa');
+  }
+
+  get fillingSteps() {
+   
+    return this.recipes.steps.filter(i => i.type === 'recheio');
+  }
+
   checkbutton( id: number){
     const index = this.selectedStepIds.indexOf(id);
     if (index === -1) {
