@@ -14,7 +14,7 @@ import { Recipe } from '../../interfaces/recipe.interface';
 })
 export class IndividualRecipeComponent implements OnInit {
   constructor(private activatedRoute : ActivatedRoute, private recipeService: RecipeHttpService) { }
-  recipeId!: any
+  
   recipe:Recipe = {
     id: 0,
     users_id: 0,
@@ -29,15 +29,46 @@ export class IndividualRecipeComponent implements OnInit {
     steps: [],
     categories_selected: [],
   }
-
+  recipeId!: any
+  isFavorite: boolean = false;
+  favoriteId!: number | string;
 
   async ngOnInit(): Promise<void> {
     this.recipeId = this.activatedRoute.snapshot.paramMap.get("id");
+    await this.recipeService.findOneFavorite(this.recipeId).subscribe((data)=>
+      { 
+        console.log(data)
+        if (data.status_code === 200) {
+
+          this.isFavorite = true
+        } else {
+          this.isFavorite = false
+        }
+      })
     const response = await this.recipeService.getOneRecipe(this.recipeId)
 
     response.subscribe((recipe)=> {
       this.recipe = recipe
     })
+  }
+
+  toggleFavorite() {
+    this.isFavorite = !this.isFavorite;
+    if (this.isFavorite) {
+      const response = this.recipeService.saveFavorite(this.recipeId)
+      response.subscribe((data)=>{
+        this.favoriteId = data.id
+      })
+    } 
+    if (!this.isFavorite) {
+      console.log("Ola amigos")
+      if (this.favoriteId) {
+        const response = this.recipeService.removeFavorite(String(this.favoriteId))
+        response.subscribe((data)=> {
+          this.favoriteId = 0
+        })
+      }
+    }
   }
 
   get doughIngredients() {

@@ -20,4 +20,20 @@ export class RecipeHttpService {
     getOneRecipe(id: string): Observable<any>{
         return this.http.get<any>(`${this.endpoint}/${id}`);
     }
+
+    saveFavorite(recipeId: string): Observable<any>{
+        const data = {
+            recipes_id: recipeId
+        }   
+        console.log(recipeId)
+        return this.http.post<any>(environments.baseURL + 'favorites', data)
+    }
+
+    removeFavorite(favoriteId: string): Observable<any>{
+        return this.http.delete<any>(`${environments.baseURL}favorites/${favoriteId}`)
+    }
+
+    findOneFavorite(recipeId: string): Observable<any>{
+        return this.http.get<any>(`${environments.baseURL}favorites/${recipeId}`)
+    }
 }
