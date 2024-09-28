@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { RecipeHttpService } from '../../../services/recipe.service';
 
 @Component({
   selector: 'app-favorite-dialog',
@@ -11,5 +12,22 @@ import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDi
   styleUrl: './favorite-dialog.component.scss'
 })
 export class FavoriteDialogComponent {
-  readonly dialogRef = inject(MatDialogRef<FavoriteDialogComponent>);
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public recipe: any, 
+    public dialogRef: MatDialogRef<FavoriteDialogComponent>,
+    private recipeService: RecipeHttpService) { }
+    id = 0
+    ngOnInit(): void {
+      console.log(this.recipe.id)
+      this.id = this.recipe.id
+    }
+
+ async toggleFavorite() {
+    console.log(this.id)
+        const response = await this.recipeService.removeFavorite(String(this.id))
+        response.subscribe((data)=> {
+          console.log(data)
+        })
+
+  }
 }

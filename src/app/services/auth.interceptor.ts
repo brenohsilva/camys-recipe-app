@@ -1,6 +1,6 @@
 import { HttpEvent, HttpEventType, HttpHandlerFn, HttpRequest } from "@angular/common/http";
 import { inject } from "@angular/core";
-import { catchError, Observable, tap, throwError } from "rxjs";
+import { catchError, EMPTY, Observable, tap, throwError } from "rxjs";
 import { AuthHttpService } from "./auth.service";
 import { Router } from "@angular/router";
 
@@ -18,9 +18,10 @@ export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn):
             }
         }),
         catchError(err => {
+            console.log("somethin went wrong", err.status)
             if (err.status === 401) {
                 inject(Router).navigate(['/login']);
-                return throwError(() => new Error('Falha na requisição'));
+                return EMPTY;
             } else if (err.status === 409) {
                 console.log(err.status)
                 return throwError(() => new Error(err.status));

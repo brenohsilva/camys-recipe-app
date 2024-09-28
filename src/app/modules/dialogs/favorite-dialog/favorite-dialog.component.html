@@ -4,5 +4,5 @@
 </mat-dialog-content>
 <mat-dialog-actions class="d-flex justify-content-between">
   <button mat-button mat-dialog-close>Não.</button>
-  <button mat-button mat-dialog-close class="bg-primary">Sim, tenho certeza.</button>
+  <button (click)="toggleFavorite()" mat-button mat-dialog-close class="bg-primary">Sim, tenho certeza.</button>
 </mat-dialog-actions>

@@ -1,0 +1,20 @@
+.favorite-btn {
+    font-size: 24px;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+  
+    &:hover {
+      cursor: pointer;
+    }
+  
+    i {
+      color: #ffbc05; /* Coração vazio */
+    }
+  
+    &:active {
+      transform: scale(1.2); /* Efeito de pulso ao clicar */
+    }
+  }
+  

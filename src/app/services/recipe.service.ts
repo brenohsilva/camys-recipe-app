@@ -36,4 +36,8 @@ export class RecipeHttpService {
     findOneFavorite(recipeId: string): Observable<any>{
         return this.http.get<any>(`${environments.baseURL}favorites/${recipeId}`)
     }
+
+    findAllFavorites(): Observable<any> {
+        return this.http.get<any>(`${environments.baseURL}favorites`)
+    }
 }
