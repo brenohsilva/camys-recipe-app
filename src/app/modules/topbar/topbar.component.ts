@@ -1,13 +1,13 @@
 import { DOCUMENT, NgClass, NgIf } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, Inject, OnInit } from '@angular/core';
 import { IProfile } from '../../interfaces/profile.interface';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [NgClass, NgIf, ],
+  imports: [NgClass, NgIf, RouterLink ],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.scss',
 })
@@ -28,6 +28,7 @@ export class TopbarComponent implements OnInit {
       }
     }
   }
+  
 
   ngOnInit(): void {
   }

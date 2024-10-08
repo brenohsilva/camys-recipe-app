@@ -21,6 +21,14 @@ export class RecipeHttpService {
         return this.http.get<any>(`${this.endpoint}/${id}`);
     }
 
+    getAllUserRecipes():Observable<any>{
+        return this.http.get<any>(`${this.endpoint}/all`)
+    }
+
+    removeRecipe(recipeId: string): Observable<any> {
+        return this.http.delete<any>(`${this.endpoint}/${recipeId}`)
+    }
+
     saveFavorite(recipeId: string): Observable<any>{
         const data = {
             recipes_id: recipeId
@@ -40,4 +48,6 @@ export class RecipeHttpService {
     findAllFavorites(): Observable<any> {
         return this.http.get<any>(`${environments.baseURL}favorites`)
     }
+
+
 }

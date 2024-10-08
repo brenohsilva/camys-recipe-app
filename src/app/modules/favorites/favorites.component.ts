@@ -16,7 +16,7 @@ import { RouterLink } from '@angular/router';
 })
 export class FavoritesComponent implements OnInit {
   favoritedRecipes: any[] = []
-
+  hasFavorites = false
   readonly dialog = inject(MatDialog);
   readonly recipeService = inject(RecipeHttpService);
   
@@ -24,7 +24,19 @@ export class FavoritesComponent implements OnInit {
     const response = await this.recipeService.findAllFavorites()
 
     response.subscribe( (data) => {
-      this.favoritedRecipes = data.recipes
+      console.log(data)
+      if (data.status_code === 200) {
+        if (data.recipes.length != 0) {
+          console.log(data.recipes.length)
+          this.favoritedRecipes = data.recipes
+          this.hasFavorites = true
+        } else {
+          this.hasFavorites = false
+        }
+      } else {
+        this.hasFavorites = false
+      }
+      
     })
     
   }

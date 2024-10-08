@@ -6,11 +6,11 @@
       <div
         class="col-12 d-flex align-items-center justify-content-between mb-1"
       >
-        <h1>{{recipe.name}}</h1>
+        <h1>{{ recipe.name }}</h1>
         <div class="d-flex gap-2">
           <button (click)="toggleFavorite()" class="btn favorite-btn">
             <i [class]="isFavorite ? 'fas fa-heart' : 'far fa-heart'"></i>
-          </button>          
+          </button>
         </div>
       </div>
       <div class="col-12 mb-2">
@@ -24,16 +24,24 @@
           <span>(4)</span>
         </div>
         <div class="mt-2 d-flex justify-content-between">
-          <span class="d-flex gap-2"><span class="material-symbols-outlined">person</span> <strong>{{recipe.portions}} </strong>Pessoas</span>
-          <span class="d-flex gap-2" >  <span class="material-symbols-outlined">schedule</span> <strong>{{recipe.time}}</strong> min </span>
+          <span class="d-flex gap-2"
+            ><span class="material-symbols-outlined">person</span>
+            <strong>{{ recipe.portions }} </strong>Pessoas</span
+          >
+          <span class="d-flex gap-2">
+            <span class="material-symbols-outlined">schedule</span>
+            <strong>{{ recipe.time }}</strong> min
+          </span>
         </div>
         <div class="mt-2">
-          <span>Criado por: <strong>{{recipe.users.username}}</strong></span>
+          <span
+            >Criado por: <strong>{{ recipe.users.username }}</strong></span
+          >
         </div>
       </div>
       <div class="col-12 mb-2">
-        <p style="text-align: justify;">
-          {{recipe.description}}
+        <p style="text-align: justify">
+          {{ recipe.description }}
         </p>
       </div>
       <div class="col-12 d-flex justify-content-start mb-4">
@@ -48,88 +56,26 @@
         <h2>Ingredientes</h2>
         <div class="d-flex justify-content-start gap-2">
           @if (recipe.type === 1) {
-            <div class="mx-4">
-              <h5>
-                <hr />
-                Massa
-              </h5>
-              <div class="d-flex flex-column gap-2 mt-4">
-                @for (item of recipe.ingredients; track $index) {
-                <span>{{ item.name }}</span>
-                }
-              </div>
-            </div>
-          }
-          @if (recipe.type === 2) {
-            <div class="mx-4">
-              <h5>
-                <hr />
-                Massa
-              </h5>
-              <div class="d-flex flex-column gap-2 mt-4">
-                @for (item of doughIngredients; track $index) {
-                <span>{{ item.name }}</span>
-                }
-              </div>
-            </div>
-            <div class="mx-4">
-              <h5>
-                <hr />
-                Recheio
-              </h5>
-              <div class="d-flex flex-column gap-2 mt-4">
-                @for (item of fillingIngredients; track $index) {
-                <span>{{ item.name }}</span>
-                }
-              </div>
-            </div>
-          }
-          
-        </div>
-      </div>
-      <div class="col-12 mt-5">
-        <h3>Passo a Passo</h3>
-        @if (recipe.type === 1) {
           <div class="mx-4">
             <h5>
               <hr />
               Massa
             </h5>
-            <div class="gap-2 mt-4">
-              @for (item of recipe.steps; track $index) {
-              <div class="d-flex flex-column mt-2">
-                <div class="d-flex gap-3 form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input border border-black"
-                  />
-                  <strong trong>Passo {{ $index + 1 }}</strong>
-                </div>
-                <span>{{ item.step }}</span>
-              </div>
+            <div class="d-flex flex-column gap-2 mt-4">
+              @for (item of recipe.ingredients; track $index) {
+              <span>{{ item.name }}</span>
               }
             </div>
           </div>
-        }
-       
-        @if (recipe.type === 2) {
+          } @if (recipe.type === 2) {
           <div class="mx-4">
             <h5>
               <hr />
               Massa
             </h5>
-            <div class="gap-2 mt-4">
-              @for (item of doughSteps; track $index) {
-              <div class="d-flex flex-column mt-2">
-                <div class="d-flex gap-3 form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input border border-black"
-                  />
-                  <strong trong>Passo {{ $index + 1 }}</strong>
-                </div>
-                <span>{{ item.step }}</span>
-              </div>
+            <div class="d-flex flex-column gap-2 mt-4">
+              @for (item of doughIngredients; track $index) {
+              <span>{{ item.name }}</span>
               }
             </div>
           </div>
@@ -138,35 +84,160 @@
               <hr />
               Recheio
             </h5>
-            <div class="gap-2 mt-4">
-              @for (item of fillingSteps; track $index) {
-              <div class="d-flex flex-column mt-2">
-                <div class="d-flex gap-3 form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input border border-black"
-                  />
-                  <strong trong>Passo {{ $index + 1 }}</strong>
-                </div>
-                <span>{{ item.step }}</span>
-              </div>
+            <div class="d-flex flex-column gap-2 mt-4">
+              @for (item of fillingIngredients; track $index) {
+              <span>{{ item.name }}</span>
               }
             </div>
           </div>
+          }
+        </div>
+      </div>
+      <div class="col-12 mt-5">
+        <h3>Passo a Passo</h3>
+        @if (recipe.type === 1) {
+        <div class="mx-4">
+          <h5>
+            <hr />
+            Massa
+          </h5>
+          <div class="gap-2 mt-4">
+            @for (item of recipe.steps; track $index) {
+            <div class="d-flex flex-column mt-2">
+              <div class="d-flex gap-3 form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input border border-black"
+                />
+                <strong trong>Passo {{ $index + 1 }}</strong>
+              </div>
+              <span>{{ item.step }}</span>
+            </div>
+            }
+          </div>
+        </div>
+        } @if (recipe.type === 2) {
+        <div class="mx-4">
+          <h5>
+            <hr />
+            Massa
+          </h5>
+          <div class="gap-2 mt-4">
+            @for (item of doughSteps; track $index) {
+            <div class="d-flex flex-column mt-2">
+              <div class="d-flex gap-3 form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input border border-black"
+                />
+                <strong trong>Passo {{ $index + 1 }}</strong>
+              </div>
+              <span>{{ item.step }}</span>
+            </div>
+            }
+          </div>
+        </div>
+        <div class="mx-4">
+          <h5>
+            <hr />
+            Recheio
+          </h5>
+          <div class="gap-2 mt-4">
+            @for (item of fillingSteps; track $index) {
+            <div class="d-flex flex-column mt-2">
+              <div class="d-flex gap-3 form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input border border-black"
+                />
+                <strong trong>Passo {{ $index + 1 }}</strong>
+              </div>
+              <span>{{ item.step }}</span>
+            </div>
+            }
+          </div>
+        </div>
         }
       </div>
     </div>
-    <div
-      class="col-sm-3 d-none d-sm-flex d-md-flex justify-content-center "
-    >
-      <div style="background-color: #fbf8f3" class="rounded-2 p-3 h-25 ">
+    <div class="col-sm-3 d-none d-sm-flex d-md-flex justify-content-center">
+      <div style="background-color: #fbf8f3" class="rounded-2 p-3 h-25">
         <h5>Palavras-chave</h5>
-        <div class="d-flex flex-column  gap-2 mt-4">
+        <div class="d-flex flex-column gap-2 mt-4">
           @for (item of recipe.categories_selected; track $index) {
-            <span style="width: fit-content;" class="bg-primary p-1 px-2 rounded-3">{{item.categoriesId.name}}</span>
+          <span
+            style="width: fit-content"
+            class="bg-primary p-1 px-2 rounded-3"
+            >{{ item.categoriesId.name }}</span
+          >
           }
           <!-- <span style="width: fit-content;" class="bg-primary p-1 px-2 rounded-3">Almoço</span>
           <span style="width: fit-content;" class="bg-primary p-1 px-2 rounded-3">no carbo</span> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mt-5 border-top py-3">
+      <h4>Comentários</h4>
+      <div>
+        <div class="border-4 w-100">
+          <textarea
+            style="min-height: 100px"
+            class="w-100 p-3"
+            name=""
+            id=""
+          ></textarea>
+          <div class="d-flex justify-content-end">
+            <button class="btn bg-primary">Comentar</button>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <img class="" src="" alt="" />
+            </div>
+            <div>
+              <div class="d-flex g gap-3">
+                <h6>Maria Helena</h6>
+                <span>27/04/2023</span>
+              </div>
+              <div>
+                <p>Essa foi a melhor receita de todaas</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>
+              <img class="" src="" alt="" />
+            </div>
+            <div>
+              <div class="d-flex g gap-3">
+                <h6>Maria Helena</h6>
+                <span>27/04/2023</span>
+              </div>
+              <div>
+                <p>Essa foi a melhor receita de todaas</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>
+              <img class="" src="" alt="" />
+            </div>
+            <div>
+              <div class="d-flex g gap-3">
+                <h6>Maria Helena</h6>
+                <span>27/04/2023</span>
+              </div>
+              <div>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Quaerat, culpa ex. Temporibus eaque magni eveniet qui,
+                  laudantium in dolorem ut nisi maxime quas voluptatibus ab, rem
+                  sint consectetur expedita blanditiis.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
