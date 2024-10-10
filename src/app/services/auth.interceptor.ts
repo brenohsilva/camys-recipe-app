@@ -20,7 +20,7 @@ export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn):
         catchError(err => {
             console.log("somethin went wrong", err.status)
             if (err.status === 401) {
-                inject(Router).navigate(['/login']);
+                window.location.href= '/login'
                 return EMPTY;
             } else if (err.status === 409) {
                 console.log(err.status)
