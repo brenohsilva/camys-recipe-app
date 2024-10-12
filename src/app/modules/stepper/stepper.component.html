@@ -147,7 +147,7 @@
               <div class="col -12 col-md-12 col-lg">
                 <div class="d-flex justify-content-center mt-4">
                   @if (recipe.urlImage) {
-                  <img [src]="recipe.urlImage" width="50%" alt="" srcset="" />
+                  <img [src]="recipe.urlImage" width="70%" alt="" srcset="" />
                   } @else {
                   <div
                     style="
@@ -175,8 +175,8 @@
                     [(ngModel)]="typeIngredients"
                   >
                     <option selected>Tipo</option>
-                    <option value="1">Massa</option>
-                    <option value="2">Recheio</option>
+                    <option value="massa">Massa</option>
+                    <option value="recheio">Recheio</option>
                   </select>
                 </div>
                 <div class="input-group input-group-sm mb-2 mt-1 w-50">

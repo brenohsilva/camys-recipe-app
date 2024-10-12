@@ -1,49 +1,63 @@
 import { NgClass } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { TopbarComponent } from "../topbar/topbar.component";
+import { TopbarComponent } from '../topbar/topbar.component';
 import { SkeletonComponent } from '../skeleton/skeleton.component';
-import {MatButtonModule} from '@angular/material/button';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { RecipeComponent } from '../recipe/recipe.component';
 import { OneRecipeComponent } from '../one-recipe/one-recipe.component';
 import { RecipeHttpService } from '../../services/recipe.service';
 import { Recipe } from '../../interfaces/recipe.interface';
+import { EmptyMyRecipesComponent } from '../empty-my-recipes/empty-my-recipes.component';
 
 @Component({
   selector: 'app-main-page',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, NgClass, TopbarComponent, TopbarComponent, SkeletonComponent, MatButtonModule, MatDialogModule],
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    NgClass,
+    TopbarComponent,
+    TopbarComponent,
+    SkeletonComponent,
+    EmptyMyRecipesComponent,
+    MatButtonModule,
+    MatDialogModule,
+  ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss',
 })
 export class MainPageComponent implements OnInit {
   readonly dialog = inject(MatDialog);
-  constructor(private readonly recipeService: RecipeHttpService){}
+  constructor(private readonly recipeService: RecipeHttpService) {}
 
   currentPage: number = 1;
   itemsPerPage: number = 6;
-  isLoading = true
-  
-  recipes: Recipe[] = [] 
+  isLoading = true;
+  myRecipes = false;
+  hasMyRecipes = true
+
+  recipes: Recipe[] = [];
 
   openDialog(recipe: any) {
+    console.log(recipe);
     const dialogRef = this.dialog.open(OneRecipeComponent, {
-      data: recipe
+      data: recipe,
     });
-    
-    dialogRef.afterClosed().subscribe(result => {
+
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
-  
- async ngOnInit(): Promise<void> {
-    const response = await this.recipeService.getAllRecipes()
-    response.subscribe((recipes)=>{
-      this.recipes = recipes
-    })
+
+  async ngOnInit(): Promise<void> {
+    const response = await this.recipeService.getAllRecipes();
+    response.subscribe((recipes) => {
+      this.recipes = recipes;
+    });
     // setTimeout(() => {
-      
+
     //   this.isLoading = true
     // }, 2000);
   }
@@ -58,7 +72,9 @@ export class MainPageComponent implements OnInit {
   }
 
   get pagesArray(): number[] {
-    return Array(this.totalPages).fill(0).map((_, i) => i + 1);
+    return Array(this.totalPages)
+      .fill(0)
+      .map((_, i) => i + 1);
   }
 
   nextPage() {
@@ -75,5 +91,24 @@ export class MainPageComponent implements OnInit {
 
   goToPage(page: number) {
     this.currentPage = page;
+  }
+
+  async recipeFilteredByowner() {
+    this.myRecipes = !this.myRecipes;
+    if (this.myRecipes) {
+      await this.recipeService.getAllUserRecipes().subscribe((data) => {
+        console.log(data);
+        this.recipes = data.recipes;
+        if (this.recipes.length === 0 ) {
+            this.hasMyRecipes = false         
+        }
+      });
+    } else {
+      
+      await this.recipeService.getAllRecipes().subscribe((recipes) => {
+        this.recipes = recipes;
+        this.hasMyRecipes = true
+      });
+    }
   }
 }

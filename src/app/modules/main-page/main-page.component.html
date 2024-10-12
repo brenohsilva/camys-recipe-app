@@ -55,8 +55,8 @@
     </div>
     <div class="d-flex justify-content-center p-2 w-100">
       <div class="row d-flex gap-2">
-        <a
-          class="d-flex justify-content-center badge bg-primary col link-offset-2 link-underline link-underline-opacity-0"
+        <button
+          class="d-flex btn justify-content-center badge bg-primary col link-offset-2 link-underline link-underline-opacity-0"
           href=""
         >
           <svg
@@ -70,9 +70,9 @@
               d="M440-240q-117 0-198.5-81.5T160-520v-240q0-33 23.5-56.5T240-840h500q58 0 99 41t41 99q0 58-41 99t-99 41h-20v40q0 117-81.5 198.5T440-240ZM240-640h400v-120H240v120Zm200 320q83 0 141.5-58.5T640-520v-40H240v40q0 83 58.5 141.5T440-320Zm280-320h20q25 0 42.5-17.5T800-700q0-25-17.5-42.5T740-760h-20v120ZM160-120v-80h640v80H160Zm280-440Z"
             />
           </svg>
-        </a>
-        <a
-          class="d-flex justify-content-center col badge bg-primary link-offset-2 link-underline link-underline-opacity-0"
+        </button>
+        <button
+          class="d-flex btn justify-content-center col badge bg-primary link-offset-2 link-underline link-underline-opacity-0"
           href=""
         >
           <svg
@@ -86,9 +86,9 @@
             />
           </svg>
           <!-- <h5><span class="badge text-bg-secondary fw-medium">Almoço</span></h5> -->
-        </a>
-        <a
-          class="d-flex justify-content-center text-black badge bg-primary col link-offset-2 link-underline link-underline-opacity-0"
+        </button>
+        <button
+          class="d-flex btn justify-content-center text-black badge bg-primary col link-offset-2 link-underline link-underline-opacity-0"
           href=""
         >
           <svg
@@ -102,9 +102,9 @@
             />
           </svg>
           <!-- <h5><span class="badge text-bg-secondary fw-medium">Jantar</span></h5> -->
-        </a>
-        <a
-          class="d-flex justify-content-center col badge bg-primary link-offset-2 link-underline link-underline-opacity-0"
+        </button>
+        <button
+          class="d-flex btn justify-content-center col badge bg-primary link-offset-2 link-underline link-underline-opacity-0"
           href=""
         >
           <svg
@@ -120,9 +120,10 @@
           <!-- <h5>
             <span class="badge text-bg-secondary fw-medium">Sobremesa</span>
           </h5> -->
-        </a>
-        <a
-          class="d-flex justify-content-center col badge bg-primary link-offset-2 link-underline link-underline-opacity-0"
+        </button>
+        <button (click)="recipeFilteredByowner()"
+        [ngClass]="myRecipes? 'active': ''"
+          class="d-flex btn justify-content-center col badge bg-primary link-offset-2 link-underline link-underline-opacity-0"
           href=""
         >
           <svg
@@ -135,18 +136,27 @@
               d="M560-564v-68q33-14 67.5-21t72.5-7q26 0 51 4t49 10v64q-24-9-48.5-13.5T700-600q-38 0-73 9.5T560-564Zm0 220v-68q33-14 67.5-21t72.5-7q26 0 51 4t49 10v64q-24-9-48.5-13.5T700-380q-38 0-73 9t-67 27Zm0-110v-68q33-14 67.5-21t72.5-7q26 0 51 4t49 10v64q-24-9-48.5-13.5T700-490q-38 0-73 9.5T560-454ZM260-320q47 0 91.5 10.5T440-278v-394q-41-24-87-36t-93-12q-36 0-71.5 7T120-692v396q35-12 69.5-18t70.5-6Zm260 42q44-21 88.5-31.5T700-320q36 0 70.5 6t69.5 18v-396q-33-14-68.5-21t-71.5-7q-47 0-93 12t-87 36v394Zm-40 118q-48-38-104-59t-116-21q-42 0-82.5 11T100-198q-21 11-40.5-1T40-234v-482q0-11 5.5-21T62-752q46-24 96-36t102-12q58 0 113.5 15T480-740q51-30 106.5-45T700-800q52 0 102 12t96 36q11 5 16.5 15t5.5 21v482q0 23-19.5 35t-40.5 1q-37-20-77.5-31T700-240q-60 0-116 21t-104 59ZM280-494Z"
             />
           </svg>
-        </a>
+        </button>
       </div>
     </div>
   </div>
 
   <div class="d-flex container m-4">
-    <div class="row">
+    <div class="row w-100">
+      @if (!hasMyRecipes) {
+        <div class="d-flex mt-3 flex-column align-content-center align-items-center justify-content-center">
+          <h3>Ops</h3>
+          <h4>Você ainda não tem nenhuma receita</h4>
+          <h4></h4>
+        </div>
+        <!-- <app-empty-my-recipes/> -->
+      }
+      
       @for (recipe of paginatedRecipes; track $index) {
-      <div class="col-sm-6 col-md-4 rounded-4 mt-5">
+      <div class="d-flex flex-column justify-content-center col-sm-6 col-md-4 col-lg-4 rounded-4 mt-5">
         <div
           class="rounded-4"
-          style="width: 100%; height: 220px; overflow: hidden"
+          style="height: 220px; overflow: hidden"
         >
           <img
             src="{{ recipe.image }}"
@@ -166,9 +176,9 @@
             class="d-flex flex-md-column flex-lg-row justify-content-lg-between align-items-lg-center justify-content-md-start align-items-md-start gap-md-2 justify-content-between align-items-center mt-2"
           >
             <p class="p-0 m-0">{{ recipe.time }} min</p>
-            <div class="d-flex gap-2">
+            <div class="d-flex row gap-2 m-0">
               @for (item of recipe.categories_selected; track $index) {
-              <span class="badge rounded-pill text-bg-primary">{{
+              <span style="width: fit-content;" class=" col-3 badge rounded-pill text-bg-primary">{{
                 item.categoriesId.name
               }}</span>
               }
